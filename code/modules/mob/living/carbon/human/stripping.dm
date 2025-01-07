@@ -35,10 +35,11 @@
 				to_chat(user, SPAN_NOTICE("The [T] is set to release [T.distribute_pressure] kPA."))
 			return TRUE
 		if("pockets")
-			visible_message(SPAN_DANGER("\The [user] is trying to empty \the [src]'s pockets!"))
-			if(do_after(user, HUMAN_STRIP_DELAY, src, do_flags = DO_EQUIP))
-				empty_pockets(user)
-			return 1
+			to_chat(user, SPAN_NOTICE("You are trying to empty \the [src]'s pockets!"))
+			if(!do_after(user, HUMAN_STRIP_DELAY, src, do_flags = DO_EQUIP))
+				visible_message(SPAN_DANGER("\The [user] tried to empty \the [src]'s pockets!"))
+				return 1
+			empty_pockets(user)
 		if("splints")
 			visible_message(SPAN_DANGER("\The [user] is trying to remove \the [src]'s splints!"))
 			if(do_after(user, HUMAN_STRIP_DELAY, src, do_flags = DO_EQUIP))
